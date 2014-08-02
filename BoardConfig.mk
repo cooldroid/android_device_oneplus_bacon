@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2011 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,39 +14,116 @@
 # limitations under the License.
 #
 
-# Inherit from MSM8974 common
--include device/oppo/msm8974-common/BoardConfigCommon.mk
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+TARGET_CPU_VARIANT := krait
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+ARCH_ARM_HAVE_TLS_REGISTER := true
 
-# Kernel
-TARGET_KERNEL_CONFIG := cyanogenmod_bacon_defconfig
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=bacon user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3
-BOARD_CUSTOM_BOOTIMG_MK := device/oneplus/bacon/mkbootimg.mk
+# Krait optimizations
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
+TARGET_USE_KRAIT_PLD_SET := true
+TARGET_KRAIT_BIONIC_PLDOFFS := 10
+TARGET_KRAIT_BIONIC_PLDTHRESH := 10
+TARGET_KRAIT_BIONIC_BBTHRESH := 64
+TARGET_KRAIT_BIONIC_PLDSIZE := 64
+
+TARGET_NO_BOOTLOADER := true
+
+BOARD_KERNEL_BASE        := 0x00000000
+BOARD_KERNEL_PAGESIZE    := 2048
+BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
+BOARD_RAMDISK_OFFSET     := 0x02000000
+BOARD_MKBOOTIMG_ARGS := --dt device/oneplus/bacon/dtb --ramdisk_offset 0x02000000 --tags_offset 0x00000000
+
+#BOARD_KERNEL_BASE := 0x80200000
+#BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
+#BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/oneplus/bacon/bluetooth
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_QCOM := true
+BLUETOOTH_HCI_USE_MCT := true
 
-# Camera
-USE_DEVICE_SPECIFIC_CAMERA := true
-COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE
+TARGET_NO_RADIOIMAGE := true
+TARGET_BOARD_PLATFORM := msm8960
+TARGET_BOOTLOADER_BOARD_NAME := A0001
+TARGET_BOOTLOADER_NAME=oneplusone
+TARGET_BOARD_INFO_FILE := device/oneplus/bacon/board-info.txt
 
-# Filesystem
-BOARD_BOOTIMAGE_PARTITION_SIZE     := 16777216
-BOARD_CACHEIMAGE_PARTITION_SIZE    := 536870912
-BOARD_PERSISTIMAGE_PARTITION_SIZE  := 33554432
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
-BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 1388314624
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 13271432192 # 13271448576 - 16384 for crypto footer
-BOARD_USERDATAEXTRAIMAGE_PARTITION_SIZE := 59914776576 # 59914792960 - 16384 for crypto footer
-BOARD_USERDATAEXTRAIMAGE_PARTITION_NAME := 64G
+# Wifi
+BOARD_HAS_QCOM_WLAN              := true
+BOARD_WLAN_DEVICE                := qcwcn
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
+WIFI_DRIVER_FW_PATH_STA          := "sta"
+WIFI_DRIVER_FW_PATH_AP           := "ap"
+
+BOARD_EGL_CFG := device/oneplus/bacon/configs/egl.cfg
+
+# global
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_USES_QCOM_BSP := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
+
+# Display
+TARGET_QCOM_DISPLAY_VARIANT := caf
+USE_OPENGL_RENDERER := true
+TARGET_USES_ION := true
+TARGET_USES_C2D_COMPOSITION := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/oneplus/bacon/rootdir/etc/fstab.bacon
-RECOVERY_VARIANT := cm
+#TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 
-TARGET_OTA_ASSERT_DEVICE := bacon,A0001
+TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 14485760
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16485760
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
 
-TARGET_INIT_VENDOR_LIB := libinit_bacon
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 2147483648
+BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 36
+BOARD_WANTS_EMMC_BOOT := true
 
-TARGET_WCNSS_MAC_PREFIX := e8bba8
-# inherit from the proprietary version
+BOARD_USES_SECURE_SERVICES := true
+
 -include vendor/oneplus/bacon/BoardConfigVendor.mk
+
+#TWRP flags
+DEVICE_RESOLUTION := 1080x1920
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_NO_USB_STORAGE := true
+TW_INCLUDE_JB_CRYPTO := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+TW_EXCLUDE_SUPERSU := true
+# The real path for this is /sys/devices/mdp.0/qcom,mdss_fb_primary.168/leds/lcd-backlight/brightness but the comma doesn't compile correctly
+TW_BRIGHTNESS_PATH := "/sys/devices/mdp.0/qcom\x2mdss_fb_primary.168/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+TW_NO_SCREEN_TIMEOUT := true
+
+#MultiROM config. MultiROM also uses parts of TWRP config
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := device/oneplus/bacon/mr_init_devices.c
+MR_DPI := xhdpi
+MR_FSTAB := device/oneplus/bacon/recovery.fstab
+MR_KEXEC_MEM_MIN := 0x85000000
+MR_USE_MROM_FSTAB := true
+MR_KEXEC_DTB := true
+MR_DEVICE_HOOKS := device/oneplus/bacon/mr_hooks.c
+MR_DEVICE_HOOKS_VER := 3
+MR_CONTINUOUS_FB_UPDATE := true
