@@ -111,8 +111,7 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 RECOVERY_SDCARD_ON_DATA := true
 BOARD_HAS_NO_REAL_SDCARD := true
 TW_EXCLUDE_SUPERSU := true
-# The real path for this is /sys/devices/mdp.0/qcom,mdss_fb_primary.168/leds/lcd-backlight/brightness but the comma doesn't compile correctly
-TW_BRIGHTNESS_PATH := "/sys/devices/mdp.0/qcom\x2mdss_fb_primary.168/leds/lcd-backlight/brightness"
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_NO_SCREEN_TIMEOUT := true
 
@@ -120,10 +119,13 @@ TW_NO_SCREEN_TIMEOUT := true
 MR_INPUT_TYPE := type_b
 MR_INIT_DEVICES := device/oneplus/bacon/mr_init_devices.c
 MR_DPI := xhdpi
+MR_DPI_FONT := 340
 MR_FSTAB := device/oneplus/bacon/recovery.fstab
-MR_KEXEC_MEM_MIN := 0x85000000
+MR_KEXEC_MEM_MIN := 0x20000000
 MR_USE_MROM_FSTAB := true
 MR_KEXEC_DTB := true
 MR_DEVICE_HOOKS := device/oneplus/bacon/mr_hooks.c
 MR_DEVICE_HOOKS_VER := 3
 MR_CONTINUOUS_FB_UPDATE := true
+MR_USE_QCOM_OVERLAY := true
+MR_QCOM_OVERLAY_HEADER := device/oneplus/bacon/framebuffer_qcom_overlay.h
