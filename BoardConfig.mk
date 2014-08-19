@@ -123,6 +123,7 @@ MR_FSTAB := device/oneplus/bacon/recovery.fstab
 MR_KEXEC_MEM_MIN := 0x20000000
 MR_USE_MROM_FSTAB := true
 MR_KEXEC_DTB := true
+MR_INFOS := device/oneplus/bacon/mrom_infos
 MR_DEVICE_HOOKS := device/oneplus/bacon/mr_hooks.c
 MR_DEVICE_HOOKS_VER := 3
 MR_CONTINUOUS_FB_UPDATE := true
