@@ -31,7 +31,3 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_PACKAGES += \
     charger_res_images \
     charger
-
-PRODUCT_COPY_FILES += \
-    device/oneplus/bacon/kernel:kernel \
-    device/oneplus/bacon/dtb:dtb
