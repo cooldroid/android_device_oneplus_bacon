@@ -133,6 +133,3 @@ MR_CONTINUOUS_FB_UPDATE := true
 MR_USE_QCOM_OVERLAY := true
 MR_QCOM_OVERLAY_HEADER := device/oneplus/bacon/framebuffer_qcom_overlay.h
 MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_RGBX_8888
-
-# For CM11s builds enable this
-#MR_QCOM_OVERLAY_HEADER := device/oneplus/bacon/framebuffer_qcom_overlay_cm11s.h
