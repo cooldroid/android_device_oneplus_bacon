@@ -31,3 +31,6 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_PACKAGES += \
     charger_res_images \
     charger
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/init.recovery.qcom.rc:root/init.recovery.qcom.rc
