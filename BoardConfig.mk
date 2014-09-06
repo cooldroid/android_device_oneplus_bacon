@@ -117,6 +117,7 @@ TW_EXCLUDE_SUPERSU := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_NO_SCREEN_TIMEOUT := true
+RECOVERY_VARIANT := twrp
 
 #MultiROM config. MultiROM also uses parts of TWRP config
 MR_INPUT_TYPE := type_b
