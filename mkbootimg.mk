@@ -37,8 +37,6 @@ $(INSTALLED_DTIMAGE_TARGET): $(DTBTOOL) $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/u
 ## Overload bootimg generation: Same as the original, + --dt arg
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(INSTALLED_DTIMAGE_TARGET) $(PRODUCT_OUT)/utilities/busybox
 	$(call pretty,"Target boot image: $@")
-	@echo -e ${CL_CYN}"----- Copying busybox to ramdisk ------"${CL_RST}
-	$(hide) cp $(PRODUCT_OUT)/utilities/busybox $(PRODUCT_OUT)/root/sbin/
 	@echo -e ${CL_CYN}"----- Making boot ramdisk ------"${CL_RST}
 	$(hide) rm -f $(INSTALLED_RAMDISK_TARGET)
 	$(hide) $(MKBOOTFS) $(TARGET_ROOT_OUT) | $(MINIGZIP) > $(INSTALLED_RAMDISK_TARGET)
@@ -52,13 +50,6 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_DTIMAGE_TARGET) \
 		$(recovery_uncompressed_ramdisk) \
 		$(recovery_kernel) \
 		$(MINIGZIP)
-	@echo -e ${CL_CYN}"----- Copying 1080x1920 resources ------"${CL_RST}
-	$(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/qhdres
-	$(hide) if [ -d "bootable/recovery-twrp" ]; then
-	$(hide) cp -R bootable/recovery-twrp/gui/devices/1080x1920/res $(TARGET_RECOVERY_ROOT_OUT)/qhdres
-	$(hide) else
-	$(hide) cp -R bootable/recovery/gui/devices/1080x1920/res $(TARGET_RECOVERY_ROOT_OUT)/qhdres
-	$(hide) fi
 	@echo -e ${CL_CYN}"----- Making recovery ramdisk ------"${CL_RST}
 	$(hide) rm -f $(recovery_uncompressed_ramdisk)
 	$(MKBOOTFS) $(TARGET_RECOVERY_ROOT_OUT) > $(recovery_uncompressed_ramdisk)
