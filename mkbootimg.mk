@@ -1,5 +1,3 @@
-LOCAL_PATH := $(call my-dir)
-
 ## Don't change anything under here. The variables are named MSM8974_whatever
 ## on purpose, to avoid conflicts with similarly named variables at other
 ## parts of the build environment
@@ -56,7 +54,11 @@ $(INSTALLED_RECOVERYIMAGE_TARGET): $(MKBOOTIMG) $(INSTALLED_DTIMAGE_TARGET) \
 		$(MINIGZIP)
 	@echo -e ${CL_CYN}"----- Copying 1080x1920 resources ------"${CL_RST}
 	$(hide) rm -rf $(TARGET_RECOVERY_ROOT_OUT)/qhdres
+	$(hide) if [ -d "bootable/recovery-twrp" ]; then
+	$(hide) cp -R bootable/recovery-twrp/gui/devices/1080x1920/res $(TARGET_RECOVERY_ROOT_OUT)/qhdres
+	$(hide) else
 	$(hide) cp -R bootable/recovery/gui/devices/1080x1920/res $(TARGET_RECOVERY_ROOT_OUT)/qhdres
+	$(hide) fi
 	@echo -e ${CL_CYN}"----- Making recovery ramdisk ------"${CL_RST}
 	$(hide) rm -f $(recovery_uncompressed_ramdisk)
 	$(MKBOOTFS) $(TARGET_RECOVERY_ROOT_OUT) > $(recovery_uncompressed_ramdisk)
