@@ -116,7 +116,7 @@ BOARD_HAS_NO_REAL_SDCARD := true
 TW_EXCLUDE_SUPERSU := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
-TW_NO_SCREEN_TIMEOUT := true
+TW_NO_SCREEN_BLANK := true
 RECOVERY_VARIANT := twrp
 
 #MultiROM config. MultiROM also uses parts of TWRP config
