@@ -86,6 +86,8 @@ TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
 
 # Recovery
+TARGET_INIT_VENDOR_LIB := libinit_bacon
+TARGET_RECOVERY_FSTAB := device/oneplus/bacon/rootdir/etc/fstab.bacon
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -127,7 +129,7 @@ MR_INPUT_TYPE := type_b
 MR_INIT_DEVICES := device/oneplus/bacon/mr_init_devices.c
 MR_DPI := xhdpi
 MR_DPI_FONT := 340
-MR_FSTAB := device/oneplus/bacon/recovery.fstab
+MR_FSTAB := device/oneplus/bacon/mr.fstab
 MR_KEXEC_MEM_MIN := 0x20000000
 MR_USE_MROM_FSTAB := true
 MR_KEXEC_DTB := true
