@@ -37,17 +37,7 @@ PRODUCT_PACKAGES += \
     fstab.bacon \
     init.bacon.rc \
     init.qcom.usb.rc \
-    ueventd.bacon.rc \
-	init.qcom-common.rc \
-    init.recovery.qcom.rc \
-    ueventd.qcom.rc \
-	init.qcom.bt.sh
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    make_ext4fs \
-    e2fsck \
-    setup_fs
+    ueventd.bacon.rc
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/twrp.fstab:recovery/root/etc/twrp.fstab
