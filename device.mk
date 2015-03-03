@@ -32,12 +32,7 @@ PRODUCT_PACKAGES += \
     charger_res_images \
     charger
 
-PRODUCT_PACKAGES += \
-    libinit_bacon \
-    fstab.bacon \
-    init.bacon.rc \
-    init.qcom.usb.rc \
-    ueventd.bacon.rc
-
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/twrp.fstab:recovery/root/etc/twrp.fstab
+    $(LOCAL_PATH)/recovery/init.recovery.qcom.rc:root/init.recovery.qcom.rc
+
+PRODUCT_COPY_FILES += device/oneplus/bacon/twrp.fstab:recovery/root/etc/twrp.fstab
