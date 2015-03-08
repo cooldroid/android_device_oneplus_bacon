@@ -70,6 +70,7 @@ TARGET_HW_DISK_ENCRYPTION := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
 TW_NO_SCREEN_BLANK := true
+TW_SCREEN_BLANK_ON_BOOT := true
 
 #MultiROM config. MultiROM also uses parts of TWRP config
 MR_INPUT_TYPE := type_b
