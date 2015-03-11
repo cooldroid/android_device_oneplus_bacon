@@ -92,4 +92,4 @@ MR_QCOM_OVERLAY_USE_VSYNC := true
 MR_PIXEL_FORMAT := "RGBX_8888"
 MR_DEVICE_VARIANTS := A0001 One
 MR_ENCRYPTION := true
-MR_ENCRYPTION_SETUP_SCRIPT := device/oneplus/bacon/mr_cp_crypto.sh
+MR_ENCRYPTION_SETUP_SCRIPT := device/oneplus/bacon/encryption/mr_cp_crypto.sh
