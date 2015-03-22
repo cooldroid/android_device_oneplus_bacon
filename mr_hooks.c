@@ -13,7 +13,9 @@
 #include <log.h>
 
 #if MR_DEVICE_HOOKS >= 1
-int mrom_hook_after_android_mounts(const char *busybox_path, const char *base_path, int type)
+int mrom_hook_after_android_mounts(__attribute__((unused)) const char *busybox_path,
+                                __attribute__((unused)) const char *base_path,
+                                __attribute__((unused)) int type)
 {
     return 0;
 }
