@@ -56,7 +56,8 @@ TARGET_WCNSS_MAC_PREFIX := e8bba8
 -include vendor/oneplus/bacon/BoardConfigVendor.mk
 
 # TWRP
-DEVICE_RESOLUTION := 1080x1920
+TW_THEME := portrait_hdpi
+TW_THEME_LANDSCAPE := landscape_hdpi
 TW_TARGET_USES_QCOM_BSP := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
