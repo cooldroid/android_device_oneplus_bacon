@@ -663,6 +663,7 @@ enum {
 #define MDP_MEMORY_ID_TYPE_FB		0x00001000
 #define MDP_BWC_EN			0x00000400
 #define MDP_DECIMATION_EN		0x00000800
+#define MDP_SMP_FORCE_ALLOC            0x00200000
 #define MDP_TRANSP_NOP 0xffffffff
 #define MDP_ALPHA_NOP 0xff
 
@@ -970,6 +971,7 @@ enum mdss_mdp_blend_op {
 	BLEND_OP_MAX,
 };
 
+#define DECIMATED_DIMENSION(dim, deci) (((dim) + ((1 << (deci)) - 1)) >> (deci))
 #define MAX_PLANES	4
 struct mdp_scale_data {
 	uint8_t enable_pxl_ext;
@@ -1283,6 +1285,15 @@ struct mdp_calib_dcm_state {
 	uint32_t dcm_state;
 };
 
+struct mdp_pp_init_data {
+	uint32_t init_request;
+};
+
+enum {
+	MDP_PP_DISABLE,
+	MDP_PP_ENABLE,
+};
+
 enum {
 	DCM_UNINIT,
 	DCM_UNBLANK,
@@ -1396,6 +1407,7 @@ enum {
 	mdp_op_calib_mode,
 	mdp_op_calib_buffer,
 	mdp_op_calib_dcm_state,
+	mdp_op_pp_init_cfg,
 	mdp_op_max,
 };
 
@@ -1428,6 +1440,7 @@ struct msmfb_mdp_pp {
 		struct mdss_ad_input ad_input;
 		struct mdp_calib_config_buffer calib_buffer;
 		struct mdp_calib_dcm_state calib_dcm;
+		struct mdp_pp_init_data init_data;
 	} data;
 };
 
