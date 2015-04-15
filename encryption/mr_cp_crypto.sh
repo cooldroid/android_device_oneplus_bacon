@@ -2,7 +2,7 @@
 # $1 - path to top of android build tree
 # $2 path to /multirom/enc folder in installation zip
 
-QCOM_KEYMASTER_FILES="keymaster.b00 keymaster.b01 keymaster.b02 keymaster.b03 keymaster.mdt"
+QCOM_KEYMASTER_FILES="keymaste.b00 keymaste.b01 keymaste.b02 keymaste.b03 keymaste.mdt"
 QCOM_CMNLIB_FILES="cmnlib.b00 cmnlib.b01 cmnlib.b02 cmnlib.b03 cmnlib.mdt"
 QCOM_LIB_FILES="libQSEEComAPI.so"
 QCOM_PATH="$1/vendor/oppo/msm8974-common/proprietary"
