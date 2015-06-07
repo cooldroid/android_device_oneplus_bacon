@@ -7,8 +7,8 @@
 #/sbl3          emmc     /dev/block/platform/msm_sdcc.1/by-name/sbl3
 /rpm           emmc     /dev/block/mmcblk0p6
 /tz            emmc     /dev/block/mmcblk0p8
-/modem_st1     emmc     /dev/block/mmcblk0p10
-/modem_st2     emmc     /dev/block/mmcblk0p11
+/modem_st1     emmc     /dev/block/mmcblk0p10 flags=backup=1;display=EFS
+/modem_st2     emmc     /dev/block/mmcblk0p11 flags=backup=1;subpartitionof=/modem_st1
 /static_nv_bk  emmc     /dev/block/mmcblk0p13
 /oppodycnvbk   emmc     /dev/block/mmcblk0p12
 /aboot         emmc     /dev/block/mmcblk0p5
