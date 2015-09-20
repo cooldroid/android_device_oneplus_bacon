@@ -515,6 +515,8 @@ struct ion_prefetch_data {
 #define MSMFB_OVERLAY_COMMIT      _IO(MSMFB_IOCTL_MAGIC, 163)
 #define MSMFB_DISPLAY_COMMIT      _IOW(MSMFB_IOCTL_MAGIC, 164, \
 						struct mdp_display_commit)
+#define MSMFB_DISPLAY_COMMIT_OXYGEN      _IOW(MSMFB_IOCTL_MAGIC, 164, \
+                        struct mdp_display_commit_oxygen)
 #define MSMFB_METADATA_SET  _IOW(MSMFB_IOCTL_MAGIC, 165, struct msmfb_metadata)
 #define MSMFB_METADATA_GET  _IOW(MSMFB_IOCTL_MAGIC, 166, struct msmfb_metadata)
 #define MSMFB_WRITEBACK_SET_MIRRORING_HINT _IOW(MSMFB_IOCTL_MAGIC, 167, \
@@ -1519,6 +1521,13 @@ struct mdp_display_commit {
 	struct fb_var_screeninfo var;
 	struct mdp_rect l_roi;
 	struct mdp_rect r_roi;
+};
+
+struct mdp_display_commit_oxygen {
+    uint32_t flags;
+    uint32_t wait_for_finish;
+    struct fb_var_screeninfo var;
+    struct mdp_rect roi;
 };
 
 /**
