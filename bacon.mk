@@ -14,6 +14,11 @@
 # limitations under the License.
 #
 
+PRODUCT_PROPERTY_OVERRIDES := \
+    ro.ota.romname=temasek-bacon \
+    ro.ota.version=$(shell date +%F | sed s@-@@g) \
+    ro.ota.manifest=https://romhut.com/roms/temasek-bacon/ota.xml
+
 ifneq ($(QCPATH),)
 $(call inherit-product-if-exists, $(QCPATH)/common/config/device-vendor.mk)
 endif
