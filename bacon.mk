@@ -89,7 +89,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.gapless.enabled=true \
     media.aac_51_output_enabled=true \
     audio.offload.pcm.16bit.enable=false \
-    audio.offload.pcm.24bit.enable=true
+    audio.offload.pcm.24bit.enable=true \
+    audio.deep_buffer.media=true
+
+# Reduce client buffer size for fast audio output tracks
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.fast_track_multiplier=1
+
+# Low latency audio buffer size in frames
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio_hal.period_size=192
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES +=
@@ -108,6 +117,9 @@ PRODUCT_PACKAGES += \
     charger_res_images
 
 # Dalvik/HWUI
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapminfree=2m
+
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
