@@ -1,0 +1,5 @@
+allow zygote init:fifo_file { read write };
+allow zygote init:unix_stream_socket getattr;
+allow zygote servicemanager:binder call;
+allow zygote system_server:binder call;
+

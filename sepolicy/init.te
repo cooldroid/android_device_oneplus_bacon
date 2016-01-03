@@ -1,0 +1,6 @@
+dontaudit init app_data_file:dir { write add_name setattr };
+dontaudit init app_data_file:file { write getattr setattr read create open };
+dontaudit init devpts:chr_file { ioctl getattr };
+dontaudit init rootfs:file execute_no_trans;
+dontaudit init self:capability sys_ptrace;
+dontaudit init untrusted_app:process signal;
