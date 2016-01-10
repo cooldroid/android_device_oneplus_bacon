@@ -2,4 +2,8 @@ allow zygote init:fifo_file { read write };
 allow zygote init:unix_stream_socket getattr;
 allow zygote servicemanager:binder call;
 allow zygote system_server:binder call;
+allow zygote app_data_file:dir search;
+allow zygote app_data_file:file { read getattr open setattr };
+allow zygote input_device:chr_file { read write ioctl open };
+allow zygote input_device:dir { read open };
 

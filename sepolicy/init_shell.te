@@ -1,2 +1,7 @@
+allow init property_socket:sock_file write;
 allow qti_init_shell bluetooth_data_file:file create_file_perms;
+allow qti_init_shell kernel:system syslog_read;
+allow qti_init_shell kmsg_device:chr_file { read write open };
+allow qti_init_shell proc_dirty_ratio:file { write open };
+allow qti_init_shell selinuxfs:file write;
 qmux_socket(qti_init_shell);
