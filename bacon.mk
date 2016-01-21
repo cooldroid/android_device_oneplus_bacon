@@ -71,6 +71,10 @@ PRODUCT_PACKAGES += \
     camera.bacon \
     Snap
 
+# Busybox
+PRODUCT_PACKAGES += \
+    busybox
+ 
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
