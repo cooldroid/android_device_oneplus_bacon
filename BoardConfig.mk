@@ -58,7 +58,7 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 # Enable DIAG on debug builds
 ifneq ($(TARGET_BUILD_VARIANT),user)
-TARGET_KERNEL_ADDITIONAL_CONFIG:= cyanogenmod_debug_config
+TARGET_KERNEL_ADDITIONAL_CONFIG ?= cyanogenmod_debug_config
 endif
 
 # ANT+
@@ -104,10 +104,6 @@ endif
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
-
-# Flags for modem (we still have an old modem)
-COMMON_GLOBAL_CFLAGS += -DUSE_RIL_VERSION_10
-COMMON_GLOBAL_CPPFLAGS += -DUSE_RIL_VERSION_10
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
