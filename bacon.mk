@@ -14,19 +14,25 @@
 # limitations under the License.
 #
 
+ifneq ($(QCPATH),)
+$(call inherit-product-if-exists, $(QCPATH)/common/config/device-vendor.mk)
+endif
+
 # overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-1080p
-
-# Haters gonna hate..
-PRODUCT_CHARACTERISTICS := nosdcard
 
 # Ramdisk
 PRODUCT_PACKAGES += \
     libinit_bacon \
     fstab.bacon \
     init.bacon.rc \
+    init.qcom.power.rc \
     init.qcom.usb.rc \
-    ueventd.bacon.rc
+    init.recovery.qcom.rc \
+    ueventd.bacon.rc \
+    keystore.msm8974 \
+    lights.msm8974 \
+    power.msm8974
 
 # Keylayouts
 PRODUCT_PACKAGES += \
@@ -60,4 +66,4 @@ $(call inherit-product-if-exists, $(QCPATH)/prebuilt_HY11/target/product/msm8974
 endif
 
 # Inherit from msm8974-common
-$(call inherit-product, device/oppo/msm8974-common/msm8974.mk)
+#$(call inherit-product, device/oppo/msm8974-common/msm8974.mk)

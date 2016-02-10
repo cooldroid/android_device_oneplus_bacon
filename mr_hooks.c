@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <stdint.h>
 #include <time.h>
+#include <errno.h>
 
 #include <log.h>
 
@@ -124,3 +125,10 @@ void tramp_hook_before_device_init(void)
     set_cpu_governor();
 }
 #endif /* MR_DEVICE_HOOKS >= 3 */
+
+#if MR_DEVICE_HOOKS >= 4
+int mrom_hook_allow_incomplete_fstab(void)
+{
+    return 1;
+}
+#endif
