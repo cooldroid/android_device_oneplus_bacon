@@ -74,6 +74,10 @@ PRODUCT_PACKAGES += \
 # Busybox
 PRODUCT_PACKAGES += \
     busybox
+    
+# OTAUpdates
+PRODUCT_PACKAGES += \
+    OTAUpdates
  
 # Charger
 PRODUCT_PACKAGES += \
