@@ -19,6 +19,8 @@
 
 PLATFORM_PATH := device/oneplus/bacon
 
+TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 TARGET_NO_BOOTLOADER := true
@@ -46,7 +48,7 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=bacon user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
 TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_SOURCE := kernel/oneplus/msm8974
@@ -137,7 +139,8 @@ TARGET_USERIMAGES_USE_F2FS := true
 TARGET_HW_DISK_ENCRYPTION := true
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
-#TW_USE_TOOLBOX := true
+BOARD_SUPPRESS_EMMC_WIPE := true
+TW_UNMOUNT_FIRMWARE_ON_BOOT := true
 TWHAVE_SELINUX := true
 
 #MultiROM config. MultiROM also uses parts of TWRP config
