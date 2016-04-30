@@ -79,6 +79,10 @@ PRODUCT_PACKAGES += \
 # OTAUpdates
 PRODUCT_PACKAGES += \
     OTAUpdates
+    
+# Gello
+PRODUCT_PACKAGES += \
+    Gello
  
 # Charger
 PRODUCT_PACKAGES += \
