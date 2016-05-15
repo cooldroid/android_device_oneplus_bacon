@@ -64,6 +64,10 @@ TARGET_SCREEN_WIDTH := 1080
 PRODUCT_PACKAGES += \
     Snap
 
+# Gello
+PRODUCT_PACKAGES += \
+    Gello
+ 
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
