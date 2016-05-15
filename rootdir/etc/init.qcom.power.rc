@@ -54,7 +54,7 @@ on enable-low-power
     write /sys/kernel/msm_thermal/sampling_ms 8000
     write /sys/kernel/msm_thermal/enabled 1
 
-    start mpdecision
+    # start mpdecision
 
     setprop sys.io.scheduler deadline
 
