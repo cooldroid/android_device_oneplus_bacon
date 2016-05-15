@@ -1,7 +1,27 @@
 on early-init
+    #I/O Schedule
     setprop sys.io.scheduler noop
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
     write /sys/class/mmc_host/mmc0/clk_scaling/scale_down_in_low_wr_load 1
+
+    ##DALVIK##
+    setprop dalvik.vm.dex2oat-flags --no-watch-dog
+    setprop dalvik.vm.dex2oat-swap false
+
+    ##TWEAK##
+    setprop dalvik.vm.dexopt-flags m=y,o=y
+
+on boot
+    #Overwrite ActivityManager's low memory killer settings
+    chmod 0664 /sys/module/lowmemorykiller/parameters/adj
+    chmod 0664 /sys/module/lowmemorykiller/parameters/minfree
+    write /sys/module/lowmemorykiller/parameters/adj 0,58,117,176,529,1000
+    write /sys/module/lowmemorykiller/parameters/minfree 16384,20480,24576,28672,34415,43737
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1    
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059   
+    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 1  
+    write /sys/module/lowmemorykiller/parameters/cost 
+    write /sys/module/lowmemorykiller/parameters/debug_level 0
 
 on enable-low-power
     write /sys/module/lpm_levels/enable_low_power/l2 4
@@ -56,7 +76,7 @@ on enable-low-power
     write /sys/kernel/msm_thermal/sampling_ms 8000
     write /sys/kernel/msm_thermal/enabled 1
 
-    start mpdecision
+    # start mpdecision
 
     setprop sys.io.scheduler deadline
 
@@ -79,6 +99,7 @@ on boot
     write /sys/kernel/msm_thermal/zone0 "1728000 45 43"
     write /sys/kernel/msm_thermal/zone1 "1574400 50 47"
     write /sys/kernel/msm_thermal/zone2 "1267200 55 53"
+    write /sys/kernel/msm_thermal/sampling_ms 8000
     write /sys/kernel/msm_thermal/enabled 1
 
 on property:sys.boot_completed=1
