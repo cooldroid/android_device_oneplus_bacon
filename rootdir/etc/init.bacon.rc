@@ -165,10 +165,6 @@ on boot
     #venus
     write /sys/bus/msm_subsys/devices/subsys2/restart_level "related"
 
-    # msm_thermal (for power HAL usage)
-    chown system system /sys/kernel/msm_thermal/user_maxfreq
-    chmod 0660 /sys/kernel/msm_thermal/user_maxfreq
-
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
 
