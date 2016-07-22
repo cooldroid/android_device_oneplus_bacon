@@ -76,10 +76,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     busybox
     
-# OTAUpdates
-PRODUCT_PACKAGES += \
-    OTAUpdates
-    
 # Gello
 PRODUCT_PACKAGES += \
     Gello
@@ -99,10 +95,6 @@ PRODUCT_PACKAGES += \
 # Display
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-
-# Gello
-PRODUCT_PACKAGES += \
-    Gello
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -221,6 +213,7 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
+    adb_keys \
     fstab.bacon \
     init.bacon.rc \
     init.qcom.power.rc \
