@@ -9,7 +9,7 @@ const char *mr_init_devices[] =
 {
 	"/sys/class/graphics/fb0",
 	
-	"/sys/block/mmcblk0",
+	"/sys/block/mmcblk0*",
 	"/sys/devices/msm_sdcc.1",
 	"/sys/devices/msm_sdcc.1/mmc_host/mmc0",
 	"/sys/devices/msm_sdcc.1/mmc_host/mmc0/mmc0:0001",

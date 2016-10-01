@@ -4,9 +4,10 @@
 /boot		   emmc		/dev/block/platform/msm_sdcc.1/by-name/boot
 /system		   ext4		/dev/block/platform/msm_sdcc.1/by-name/system
 /data		   ext4		/dev/block/platform/msm_sdcc.1/by-name/userdata  flags=encryptable=/dev/block/platform/msm_sdcc.1/by-name/reserve4
+/data		   f2fs		/dev/block/platform/msm_sdcc.1/by-name/userdata
 /cache		   ext4		/dev/block/platform/msm_sdcc.1/by-name/cache
-/misc		   emmc		/dev/block/platform/msm_sdcc.1/by-name/misc
+/cache		   f2fs		/dev/block/platform/msm_sdcc.1/by-name/cache
 /recovery	   emmc		/dev/block/platform/msm_sdcc.1/by-name/recovery
+/misc		   emmc		/dev/block/platform/msm_sdcc.1/by-name/misc
 
-/usb_otg       vfat     /dev/block/sda1 /dev/block/sda                   flags=display="USB-OTG";storage;wipeingui;removable
-
+/usb_otg	    auto	/dev/block/sda1	        /dev/block/sda	    flags=display="USB-OTG";storage;wipeingui;removable

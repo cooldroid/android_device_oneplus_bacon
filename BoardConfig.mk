@@ -104,6 +104,7 @@ endif
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_CRYPTFS_HW_PATH := $(PLATFORM_PATH)/cryptfs_hw
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -118,8 +119,6 @@ BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 13271448576
 BOARD_USERDATAEXTRAIMAGE_PARTITION_SIZE := 59914792960
 BOARD_USERDATAEXTRAIMAGE_PARTITION_NAME := 64G
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 
 # Disable secure discard for fast formatting
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
@@ -159,10 +158,68 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_RIL_VARIANT := caf
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.bacon
+#TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.bacon
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # RPC
 TARGET_NO_RPC := true
+
+# TWRP
+RECOVERY_VARIANT := twrp
+TW_THEME := portrait_hdpi
+TW_THEME_LANDSCAPE := landscape_hdpi
+TW_TARGET_USES_QCOM_BSP := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_NO_USB_STORAGE := true
+TW_INCLUDE_CRYPTO := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+BOARD_SUPPRESS_EMMC_WIPE := true
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+TARGET_HW_DISK_ENCRYPTION := true
+TW_UNMOUNT_FIRMWARE_ON_BOOT := true
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+#TW_USE_TOOLBOX := true
+BOARD_SUPPRESS_EMMC_WIPE := true
+TW_UNMOUNT_FIRMWARE_ON_BOOT := true
+TWHAVE_SELINUX := true
+
+#MultiROM config. MultiROM also uses parts of TWRP config
+TARGET_RECOVERY_IS_MULTIROM := true
+MR_NO_KEXEC := enabled
+MR_CONTINUOUS_FB_UPDATE := true
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := $(PLATFORM_PATH)/multirom/mr_init_devices.c
+MR_DPI := xhdpi
+MR_DPI_FONT := 340
+MR_USE_MROM_FSTAB := true
+MR_FSTAB := $(PLATFORM_PATH)/multirom/mrom.fstab
+MR_KEXEC_MEM_MIN := 0x20000000
+MR_KEXEC_DTB := true
+MR_DEVICE_HOOKS := $(PLATFORM_PATH)/multirom/mr_hooks.c
+MR_DEVICE_HOOKS_VER := 4
+MR_USE_QCOM_OVERLAY := true
+MR_QCOM_OVERLAY_HEADER := $(PLATFORM_PATH)/multirom/framebuffer_qcom_overlay.h
+MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_RGBX_8888
+MR_QCOM_OVERLAY_HEAP_ID_MASK := 2
+MR_INFOS := $(PLATFORM_PATH)/multirom/mrom_infos
+MR_DEVICE_SPECIFIC_VERSION := e
+MR_DEVICE_VARIANTS := bacon A0001 oneplus OnePlus ONE
+MR_ENCRYPTION := true
+# bootmenu
+DEVICE_RESOLUTION := 1080x1920
+MR_PIXEL_FORMAT := "RGBX_8888"
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+# Versioning
+include $(PLATFORM_PATH)/multirom/MR_REC_VERSION.mk
+BOARD_MKBOOTIMG_ARGS += --board mrom$(MR_REC_VERSION)
+MR_REC_VERSION := $(shell date -u +%Y%m%d)-01
+#Force populating /dev/block/platform/msm_sdcc.1/by-name
+#from the emmc
+MR_POPULATE_BY_NAME_PATH := "/dev/block/platform/msm_sdcc.1/by-name"
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
@@ -200,51 +257,3 @@ endif
 endif
 
 -include vendor/oneplus/bacon/BoardConfigVendor.mk
-
-# TWRP
-DEVICE_RESOLUTION := 1080x1920
-TW_TARGET_USES_QCOM_BSP := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TW_NO_USB_STORAGE := true
-TW_INCLUDE_CRYPTO := true
-BOARD_SUPPRESS_SECURE_ERASE := true
-BOARD_SUPPRESS_EMMC_WIPE := true
-RECOVERY_SDCARD_ON_DATA := true
-BOARD_HAS_NO_REAL_SDCARD := true
-RECOVERY_VARIANT := twrp
-TW_THEME := portrait_hdpi
-TW_THEME_LANDSCAPE := landscape_hdpi
-BOARD_MKBOOTIMG_ARGS := --board mrom20160417-01
-TARGET_USERIMAGES_USE_F2FS := true
-TARGET_HW_DISK_ENCRYPTION := true
-TW_UNMOUNT_FIRMWARE_ON_BOOT := true
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 255
-#TW_USE_TOOLBOX := true
-BOARD_SUPPRESS_EMMC_WIPE := true
-TW_UNMOUNT_FIRMWARE_ON_BOOT := true
-TWHAVE_SELINUX := true
-
-#MultiROM config. MultiROM also uses parts of TWRP config
-TARGET_RECOVERY_IS_MULTIROM := true
-MR_INPUT_TYPE := type_b
-MR_INIT_DEVICES := device/oneplus/bacon/mr_init_devices.c
-MR_DPI := xhdpi
-MR_DPI_FONT := 340
-MR_FSTAB := device/oneplus/bacon/rootdir/etc/twrp.fstab
-MR_KEXEC_MEM_MIN := 0x20000000
-MR_USE_MROM_FSTAB := true
-MR_KEXEC_DTB := true
-MR_INFOS := device/oneplus/bacon/mrom_infos
-MR_DEVICE_HOOKS := device/oneplus/bacon/mr_hooks.c
-MR_DEVICE_HOOKS_VER := 4
-MR_CONTINUOUS_FB_UPDATE := true
-MR_USE_QCOM_OVERLAY := true
-MR_QCOM_OVERLAY_HEADER := device/oneplus/bacon/framebuffer_qcom_overlay.h
-MR_QCOM_OVERLAY_CUSTOM_PIXEL_FORMAT := MDP_RGBX_8888
-MR_PIXEL_FORMAT := "RGBX_8888"
-MR_DEVICE_VARIANTS := A0001 One
-MR_ENCRYPTION := true
-MR_DEVICE_SPECIFIC_VERSION := "b"
-MR_ALLOW_NKK71_NOKEXEC_WORKAROUND := true
